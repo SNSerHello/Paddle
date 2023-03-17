@@ -1,4 +1,4 @@
-if(NOT WITH_GPU)
+﻿if(NOT WITH_GPU)
   return()
 endif()
 
@@ -173,7 +173,9 @@ function(select_nvcc_arch_flags out_variable out_arch_bin)
     if(WITH_NV_JETSON)
       set(cuda_arch_bin "87")
     else()
-      if(${CMAKE_CUDA_COMPILER_VERSION} LESS 11.1) # CUDA 11.0
+      if(${CMAKE_CUDA_COMPILER_VERSION} LESS 11.0) # CUDA 10.1/2
+        set(cuda_arch_bin "75")
+      elseif(${CMAKE_CUDA_COMPILER_VERSION} LESS 11.1) # CUDA 11.0
         set(cuda_arch_bin "80")
       else()
         set(cuda_arch_bin "80 86")
